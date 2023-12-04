@@ -5,7 +5,7 @@
     $textColor = match ($textColor) {
       'gray'   => 'text-gray-800',
       'blue'   => 'text-blue-800',
-      'red'   => 'text-red-800',
+      'red'   => 'text-red-yellow',
       'yellow'   => 'text-yellow-800',
       default => 'text-gray-100',
         
