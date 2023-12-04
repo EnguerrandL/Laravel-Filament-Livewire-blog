@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class Post extends Model
@@ -17,15 +18,15 @@ class Post extends Model
     protected $fillable = [
         'user_id',
         'title',
-        'slug', 
+        'slug',
         'image',
         'body',
         'published_at',
         'featured'
-        
+
     ];
 
-  
+
 
     protected $casts = [
         'published_at' => 'datetime',
@@ -49,11 +50,24 @@ class Post extends Model
 
         return $query->where('published_at', '<=', Carbon::now());
     }
+
+
     public function scopeFeatured($query)
     {
 
         return $query->where('featured', true);
     }
+
+
+    public function scopeWithCategory($query, string $category)
+    {
+        
+        $query->whereHas('categories', function ($query) use ($category) {
+            $query->where('slug', $category);
+        });
+    }
+
+    
 
     public function getExcerpt()
     {
@@ -65,6 +79,14 @@ class Post extends Model
     {
         $mins =  round(str_word_count($this->body) / 250);
 
-       return ($mins < 1 ) ? 1 : $mins;
+        return ($mins < 1) ? 1 : $mins;
+    }
+
+
+    public function getThumbnailImg()
+    {
+        $isUrl = str_contains($this->image, 'http');
+
+        return ($isUrl) ? $this->image : Storage::url($this->image);
     }
 }
