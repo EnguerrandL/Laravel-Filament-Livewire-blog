@@ -28,6 +28,7 @@ class Post extends Model
 
 
 
+
     protected $casts = [
         'published_at' => 'datetime',
     ];
@@ -46,8 +47,14 @@ class Post extends Model
     }
 
 
-    public function likes(){
+    public function likes()
+    {
         return $this->belongsToMany(User::class, 'post_like')->withTimestamps();
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
     }
 
 
@@ -67,13 +74,13 @@ class Post extends Model
 
     public function scopeWithCategory($query, string $category)
     {
-        
+
         $query->whereHas('categories', function ($query) use ($category) {
             $query->where('slug', $category);
         });
     }
 
-    
+
 
     public function getExcerpt()
     {
