@@ -56,7 +56,7 @@ class PostResource extends Resource
                     Toggle::make('featured')->default(false),
                     FileUpload::make('image')->image()->directory('posts/thumbnails'),
                     DateTimePicker::make('published_at')->nullable(),
-                    Select::make('author')->relationship('author', 'name')->searchable()->required(),
+                    Select::make('user_id')->relationship('author', 'name')->searchable()->required(),
                     Select::make('categories')->relationship('categories', 'title')->searchable()->multiple(),
 
                 ]),
