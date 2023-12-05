@@ -50,6 +50,9 @@
 
         <livewire:post-comments :key="'comments-' . $post->id" :$post />
 
+       
+        
+
     </article>
 
 

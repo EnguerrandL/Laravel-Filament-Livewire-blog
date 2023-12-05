@@ -25,6 +25,13 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@admin.fr',
             'password' => Hash::make(12345678),
         ]);
+        \App\Models\User::factory()->create([
+            'name' => 'test',
+            'email' => 'test@test.fr',
+            'password' => Hash::make(12345678),
+        ]);
+
+        
 
         Post::factory(100)->create();
         Category::factory(5)->create();

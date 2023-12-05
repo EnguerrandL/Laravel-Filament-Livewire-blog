@@ -26,13 +26,13 @@
                     {{ $comment->comment }}
                 </div>
             </div>
-
+            <livewire:post-reply :key="'reply-' . $post->id" :$post />
         @empty
             <div class="text-gray-500 text-center">
                 <span> No Comments Posted</span>
             </div>
         @endforelse
-          
+       
     </div class="m-y">
     {{ $this->comments->links() }}
 </div>
