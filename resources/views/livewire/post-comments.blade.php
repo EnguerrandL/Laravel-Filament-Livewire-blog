@@ -26,7 +26,7 @@
                     {{ $comment->comment }}
                 </div>
             </div>
-            <livewire:post-reply :key="'reply-' . $post->id" :$post />
+            {{-- <livewire:post-reply :key="'reply-' . $post->id" :$post /> --}}
         @empty
             <div class="text-gray-500 text-center">
                 <span> No Comments Posted</span>

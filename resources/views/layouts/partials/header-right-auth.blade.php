@@ -1,5 +1,12 @@
+<div class=" flex space-x-4 ms-3 relative">
 
-<div class="ms-3 relative">
+    @can('viewAdmin', App\Models\User::class)
+        <x-nav-link :navigate="false" href="{{ route('filament.admin.auth.login') }}" :active="request()->routeIs('filament.admin.auth.login')">
+            {{ __('Admin') }}
+        </x-nav-link>
+    @endcan
+
+
     <x-dropdown align="right" width="48">
         <x-slot name="trigger">
             @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
@@ -16,8 +23,7 @@
 
                         <svg class="ms-2 -me-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none"
                             viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
                         </svg>
                     </button>
                 </span>
