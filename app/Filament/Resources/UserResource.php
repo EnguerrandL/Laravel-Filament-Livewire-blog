@@ -32,7 +32,7 @@ class UserResource extends Resource
                     ->required()
                     ->maxLength(255),
                 Forms\Components\Select::make('role')
-                ->options(User::ROLES)
+                    ->options(User::ROLES)
                     ->required(),
 
 
@@ -49,6 +49,7 @@ class UserResource extends Resource
                 Tables\Columns\TextColumn::make('email')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('role')
+                    ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->searchable(),
