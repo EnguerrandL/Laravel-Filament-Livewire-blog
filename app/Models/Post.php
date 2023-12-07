@@ -67,6 +67,21 @@ class Post extends Model
     }
 
 
+    public function scopePopular($query)
+    {
+
+        return $query->withCount('likes')
+        ->orderBy('likes_count', 'DESC');
+    }
+
+
+    public function scopeSearch($query, $search = '')
+    {
+
+        return $query->where('title', 'like', "%{$search}%");
+    }
+
+
     public function scopeFeatured($query)
     {
 
