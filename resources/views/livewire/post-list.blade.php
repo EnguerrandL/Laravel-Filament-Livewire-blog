@@ -15,7 +15,7 @@
 
             @if ($search)
             <span class="ml-2">
-                containing : <strong> {{ $search }} </strong> 
+                {{__('blog.containing')}} : <strong> {{ $search }} </strong> 
             </span>
             @endif
 
@@ -24,13 +24,13 @@
         <div class="flex items-center space-x-4 font-light ">
             
            <x-checkbox  wire:model.live='popular' />
-           <x-label> Popular </x-label>
+           <x-label> {{__('blog.popular')}} </x-label>
             <button wire:click="setSort('DESC')"
                 class="{{ $sort === 'DESC' ? 'text-gray-900 border-b border-gray-700' : 'text-gray-500' }}  py-4 ">
-                Latest</button>
+                {{__('blog.latest')}}</button>
             <button wire:click="setSort('ASC')"
                 class="{{ $sort === 'ASC' ? 'text-gray-900 border-b border-gray-700' : 'text-gray-500' }} py-4 ">
-                Oldest</button>
+                {{__('blog.oldest')}}</button>
         </div>
     </div>
     <div class="py-4">
