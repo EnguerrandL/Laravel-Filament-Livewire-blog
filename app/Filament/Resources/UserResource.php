@@ -49,6 +49,14 @@ class UserResource extends Resource
                 Tables\Columns\TextColumn::make('email')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('role')
+                    ->badge()
+                    ->color(function (string $state): string {
+                        return match ($state) {
+                            'ADMIN' => 'info',
+                            'EDITOR' => 'success',
+                            'USER' => 'gray',
+                        };
+                    })
                     ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
