@@ -10,6 +10,7 @@ return [
     'register' => 'Register',
     'login' => 'Login',
     'explore' => 'Explore',
+    'gallery' => 'Gallery'
 
 
 

@@ -22,6 +22,9 @@
                 <x-nav-link href="{{ route('posts.index') }}" :active="request()->routeIs('posts.index')">
                     {{ __('menu.blog') }}
                 </x-nav-link>
+                <x-nav-link href="{{ route('gallery.index') }}" :active="request()->routeIs('gallery.index')">
+                    {{ __('menu.gallery') }}
+                </x-nav-link>
 
             </div>
         </div>
