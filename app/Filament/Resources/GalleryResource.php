@@ -16,6 +16,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 use Illuminate\Support\Str;
 
@@ -32,27 +33,27 @@ class GalleryResource extends Resource
                 TextInput::make('name')->required(),
 
 
-                Section::make('Gallery')->schema([ 
+                Section::make('Gallery')->schema([
 
 
                     FileUpload::make('url')
-                    ->label('Your pictures')
-                    ->multiple()
-                    ->image()
-                  
-                    ->reorderable()
-                    ->directory('Gallery' )
-                    ->getUploadedFileNameForStorageUsing(
-                        fn (TemporaryUploadedFile $file): string => (string) str($file->getClientOriginalName())
-                            ->prepend(Str::random(10)),
-                    )
-                  
+                        ->label('Your pictures')
+                        ->multiple()
+                        ->image()
+
+                        ->reorderable()
+                        ->directory('galleries')
+                        ->getUploadedFileNameForStorageUsing(
+                            fn (TemporaryUploadedFile $file): string => (string) str($file->getClientOriginalName())
+                                ->prepend(Str::random(10)),
+                        )
+
 
 
                 ])->columnSpanFull(),
 
-           
-         
+
+
 
             ]);
     }
@@ -68,6 +69,18 @@ class GalleryResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make()
+                // ->after(function (Gallery $record) {
+                //     // delete single
+                //     if ($record->url) {
+                //        Storage::disk('public')->delete($record->url);
+                //     }
+                //     // delete multiple
+                //     if ($record->url) {
+                //        foreach ($record->url as $ph) Storage::disk('public')->delete($ph);
+                //     }
+                //  }),
+
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -78,14 +91,14 @@ class GalleryResource extends Resource
                 Tables\Actions\CreateAction::make(),
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [
@@ -93,5 +106,5 @@ class GalleryResource extends Resource
             'create' => Pages\CreateGallery::route('/create'),
             'edit' => Pages\EditGallery::route('/{record}/edit'),
         ];
-    }    
+    }
 }

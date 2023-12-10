@@ -2,20 +2,20 @@
 
 
 
-<div class="">
+<div class="grid grid-cols-3 gap-1">
 
     
     @forelse ($galleries as $gallery)
         
-  
-    <h1 class="text-xl">{{ $gallery->name }} </h1>
-        <div class="grid grid-cols-2 gap-2">
+   
 
+        <div class="flex">
+            <h1 class="text-xl flex">{{ $gallery->name }} </h1>
            
             @foreach ($gallery->url as $url)
                 <div>
 
-                    <img class="h-auto max-w-full rounded-lg" src="{{ Storage::url($url) }}" alt="">
+                    <img class="h-auto   rounded-lg" src="{{ Storage::url($url) }}" alt="">
                 </div>
             @endforeach
 
